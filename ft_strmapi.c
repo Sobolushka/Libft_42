@@ -6,7 +6,7 @@
 /*   By: UTurkey <uturkey@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 19:17:08 by UTurkey           #+#    #+#             */
-/*   Updated: 2020/05/19 00:30:34 by UTurkey          ###   ########.fr       */
+/*   Updated: 2020/05/23 19:59:15 by UTurkey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char			*str;
 
 	i = 0;
-	if (!(str = (char *)malloc(sizeof(char) * ft_strlen(s) + 1)) \
-	&& s[i] == '\0')
+	if (!s)
+		return (NULL);
+	if (!(str = (char *)malloc(sizeof(char) * ft_strlen(s) + 1)))
 		return (0);
 	while (s[i] != '\0')
 	{

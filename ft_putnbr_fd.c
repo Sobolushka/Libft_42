@@ -6,13 +6,28 @@
 /*   By: UTurkey <uturkey@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 20:20:49 by UTurkey           #+#    #+#             */
-/*   Updated: 2020/05/19 00:27:16 by UTurkey          ###   ########.fr       */
+/*   Updated: 2020/05/23 23:11:40 by UTurkey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+static void		number(long nbr, int fd)
 {
-	ft_putstr_fd(ft_itoa(n), fd);
+	if (nbr > 9)
+		number(nbr / 10, fd);
+	ft_putchar_fd(nbr % 10 + '0', fd);
+}
+
+void			ft_putnbr_fd(int n, int fd)
+{
+	long nbr;
+
+	nbr = n;
+	if (nbr < 0)
+	{
+		ft_putchar_fd('-', fd);
+		nbr = -nbr;
+	}
+	number(nbr, fd);
 }

@@ -6,7 +6,7 @@
 /*   By: UTurkey <uturkey@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/16 22:26:57 by UTurkey           #+#    #+#             */
-/*   Updated: 2020/05/19 00:29:22 by UTurkey          ###   ########.fr       */
+/*   Updated: 2020/05/23 19:54:38 by UTurkey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = 0;
 	j = 0;
-	if (s1[i] == '\0' || s2[i] == '\0')
+	if (!s1 || !s2)
 		return (NULL);
-	rez = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	rez = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (rez == NULL)
 		return (NULL);
 	while (s1[i] != '\0')

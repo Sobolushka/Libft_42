@@ -6,20 +6,20 @@
 /*   By: UTurkey <uturkey@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 17:37:06 by uturkey           #+#    #+#             */
-/*   Updated: 2020/05/19 00:32:49 by UTurkey          ###   ########.fr       */
+/*   Updated: 2020/05/23 19:33:10 by UTurkey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		putnbr(int nbr)
+static int		putnbr(long nbr)
 {
-	if (nbr > 10)
+	if (nbr > 9)
 		return (putnbr(nbr / 10) + 1);
 	return (1);
 }
 
-char	*wrote(char *str, int len, int kontrol, int nbr)
+static char		*wrote(char *str, int len, int kontrol, long nbr)
 {
 	if (kontrol == 1)
 	{
@@ -30,7 +30,7 @@ char	*wrote(char *str, int len, int kontrol, int nbr)
 	while (len >= kontrol)
 	{
 		str[len] = nbr % 10 + '0';
-		if (nbr > 10)
+		if (nbr > 9)
 		{
 			nbr = nbr / 10;
 		}
@@ -39,23 +39,25 @@ char	*wrote(char *str, int len, int kontrol, int nbr)
 	return (str);
 }
 
-char	*ft_itoa(int nbr)
+char			*ft_itoa(int nbr)
 {
 	int		len;
 	char	*str;
 	int		kontrol;
+	long	v;
 
 	kontrol = 0;
 	len = 0;
-	if (nbr < 0)
+	v = nbr;
+	if (v < 0)
 	{
-		nbr = nbr * -1;
+		v = v * -1;
 		kontrol = 1;
 		len = 1;
 	}
-	len = len + putnbr(nbr);
-	if (!(str = (char*)malloc(sizeof(str) * (len + 1))))
+	len = len + putnbr(v);
+	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
-	wrote(str, len, kontrol, nbr);
+	wrote(str, len, kontrol, v);
 	return (str);
 }

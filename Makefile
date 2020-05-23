@@ -6,7 +6,7 @@
 #    By: UTurkey <uturkey@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/18 21:04:21 by UTurkey           #+#    #+#              #
-#    Updated: 2020/05/18 21:04:41 by UTurkey          ###   ########.fr        #
+#    Updated: 2020/05/23 23:27:29 by UTurkey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS=ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c \
 	ft_strdup.c ft_strjoin.c \
 	ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
 	ft_strncmp.c ft_strnstr.c \
-	ft_strrchr.c ft_strstr.c \
+	ft_strrchr.c ft_strstr.c ft_strtrim.c\
 	ft_substr.c ft_tolower.c ft_toupper.c
 
 OBJECTS=ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o \
@@ -35,7 +35,7 @@ OBJECTS=ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o \
 	ft_strdup.o ft_strjoin.o \
 	ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strmapi.o \
 	ft_strncmp.o ft_strnstr.o \
-	ft_strrchr.o ft_strstr.o \
+	ft_strrchr.o ft_strstr.o ft_strtrim.o\
 	ft_substr.o ft_tolower.o ft_toupper.o
 
 INCLUDES=./
@@ -43,12 +43,12 @@ INCLUDES=./
 all: $(NAME)
 
 $(NAME): $(OBJECTS) libft.h
-	@gcc -Wall -Wextra -Werror -I$(INCLUDES) -c $(SRCS)
-	@ar rc $(NAME) $(OBJECTS)
+	@gcc -Wall -Wextra -Werror -std=c99 -I$(INCLUDES) -c ft_*.c
+	@ar rc $(NAME) *.o
 	@ranlib $(NAME)
 
 clean:
-	@/bin/rm -f $(OBJECTS)
+	@/bin/rm -f *.o
 
 fclean: clean
 	@/bin/rm -f $(NAME)

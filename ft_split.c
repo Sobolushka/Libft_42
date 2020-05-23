@@ -5,50 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: UTurkey <uturkey@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/17 15:30:07 by UTurkey           #+#    #+#             */
-/*   Updated: 2020/05/17 23:45:20 by UTurkey          ###   ########.fr       */
+/*   Created: 2020/05/23 22:44:10 by UTurkey           #+#    #+#             */
+/*   Updated: 2020/05/23 23:10:55 by UTurkey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		count(char const *s, char c)
+static int		count_word(char const *s, char c)
 {
-	int i;
-	int j;
+	int	word;
+	int	j;
 
 	if (s[0] == '\0')
 		return (0);
-	i = 1;
 	j = 0;
+	word = 0;
 	while (s[j] != '\0')
 	{
-		if (s[j] == c)
-			i++;
-		j++;
+		while (s[j] == c)
+			j++;
+		while (s[j] != c && s[j] != '\0')
+			j++;
+		if (s[j] == c || (s[j] == '\0' && s[j - 1] != c))
+			word++;
 	}
-	return (i);
+	return (word);
 }
 
-char	*ting(char *dest, const char *src, unsigned int s, int n)
-{
-	int j;
-	int count1;
-
-	j = 0;
-	count1 = 0;
-	while ((src[s] != '\0') && (count1 < n))
-	{
-		dest[j] = src[s];
-		s++;
-		count1++;
-		j++;
-	}
-	dest[j] = '\0';
-	return (dest);
-}
-
-char	**ft_free_arr(char **s1, int j)
+static char		**ft_free_arr(char **s1, int j)
 {
 	int k;
 
@@ -58,50 +43,45 @@ char	**ft_free_arr(char **s1, int j)
 		free(s1[k]);
 		k++;
 	}
+	free(s1);
 	return (0);
 }
 
-char	**wrote(char **s1, char const *big, char c, int i)
+static char		**wrote(char const *s, char c, char **arr, size_t word)
 {
-	int s;
-	int k;
-	int e;
-	int j;
+	size_t	i;
+	size_t	j;
+	size_t	start;
 
+	i = 0;
 	j = 0;
-	while (big[i] != '\0')
+	start = 0;
+	while (s[i] != '\0')
 	{
-		if (k == 0)
+		while (s[i] == c)
+			start = ++i;
+		while (s[i] != c && s[i] != '\0')
+			i++;
+		if (s[i] == c || (s[i] == '\0' && s[i - 1] != c))
 		{
-			s = i;
-			k = 1;
-		}
-		if (big[i] == c || big[i + 1] == '\0')
-		{
-			e = i;
-			if (!(s1[j] = (char *)malloc(sizeof(char) * (e - s + 2))))
-				return (ft_free_arr(s1, j));
-			s1[j] = ting(s1[j], big, s, e - s + 1);
+			if (!(arr[j] = ft_substr(s, start, (i - start))))
+				return (ft_free_arr(arr, word));
 			j++;
-			k = 0;
 		}
-		i++;
 	}
-	return (s1);
+	arr[j] = NULL;
+	return (arr);
 }
 
-char	**ft_split(char const *s, char c)
+char			**ft_split(char const *s, char c)
 {
+	size_t	count;
 	char	**arr;
-	int		i;
-	int		count1;
 
-	count1 = count(s, c);
-	if (!(arr = (char**)malloc(count1 * sizeof(char*) + 1)))
-		return (0);
-	i = 0;
-	if (!(arr = wrote(arr, s, c, i)))
-		free(arr);
-	arr[count1] = ting(arr[count1], "", 0, 0);
-	return (arr);
+	if (!s)
+		return (NULL);
+	count = count_word(s, c);
+	if (!(arr = (char**)malloc(sizeof(char *) * count + 1)))
+		return (NULL);
+	return (wrote(s, c, arr, count));
 }

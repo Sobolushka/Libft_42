@@ -6,13 +6,13 @@
 /*   By: UTurkey <uturkey@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 21:42:15 by UTurkey           #+#    #+#             */
-/*   Updated: 2020/05/19 00:31:17 by UTurkey          ###   ########.fr       */
+/*   Updated: 2020/05/20 10:46:40 by UTurkey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, const char *src)
+static char		*ft_strcpy(char *dest, const char *src)
 {
 	int i;
 
@@ -26,7 +26,7 @@ char	*ft_strcpy(char *dest, const char *src)
 	return (dest);
 }
 
-char	*ft_strdup(const char *s1)
+char			*ft_strdup(const char *s1)
 {
 	size_t	len;
 	char	*s2;

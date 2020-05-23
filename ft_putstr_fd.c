@@ -6,7 +6,7 @@
 /*   By: UTurkey <uturkey@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 20:05:15 by UTurkey           #+#    #+#             */
-/*   Updated: 2020/05/17 21:05:01 by UTurkey          ###   ########.fr       */
+/*   Updated: 2020/05/23 20:00:27 by UTurkey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
+	if (!s)
+		return ;
 	write(fd, s, ft_strlen(s));
 }
