@@ -6,7 +6,7 @@
 #    By: UTurkey <uturkey@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/18 21:04:21 by UTurkey           #+#    #+#              #
-#    Updated: 2020/05/23 23:27:29 by UTurkey          ###   ########.fr        #
+#    Updated: 2020/05/24 23:04:12 by UTurkey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,14 +37,19 @@ OBJECTS=ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o \
 	ft_strncmp.o ft_strnstr.o \
 	ft_strrchr.o ft_strstr.o ft_strtrim.o\
 	ft_substr.o ft_tolower.o ft_toupper.o
-
+BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstadd_back.c\
+		ft_lstsize.c ft_lstlast.c ft_lstdelone.c ft_lstclear.c \
+		ft_lstiter.c ft_lstmap.c
+BONUSO = ft_lstadd_back.o ft_lstadd_front.o ft_lstlast.o \
+			ft_lstnew.o ft_lstsize.o ft_lstdelone.o ft_lstclear.o \
+			ft_lstiter.o ft_lstmap.o
 INCLUDES=./
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS) libft.h
-	@gcc -Wall -Wextra -Werror -std=c99 -I$(INCLUDES) -c ft_*.c
-	@ar rc $(NAME) *.o
+	@gcc -Wall -Wextra -Werror -std=c99 -I$(INCLUDES) -c $(SRCS)
+	@ar rc $(NAME) $(OBJECTS)
 	@ranlib $(NAME)
 
 clean:
@@ -54,3 +59,7 @@ fclean: clean
 	@/bin/rm -f $(NAME)
 
 re: fclean all
+bonus: $(BONUSO) libft.h
+	@gcc -Wall -Wextra -Werror -std=c99 -I$(INCLUDES) -c $(BONUS)
+	@ar rc $(NAME) $(BONUSO)
+	@ranlib $(NAME)
